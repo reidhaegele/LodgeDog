@@ -1,0 +1,101 @@
+﻿@model LodgeDogDB.Models.Owners
+
+@{
+    ViewData["Title"] = "Use";
+}
+
+<h1>Use</h1>
+
+<h4>Owners</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Use">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Number" />
+            <input type="hidden" asp-for="Signupdate" />
+            <input type="hidden" asp-for="TimeStamp" />
+            <input type="hidden" asp-for="Fullservice" />
+            <input type="hidden" asp-for="Primarycontact" />
+            <input type="hidden" asp-for="Phonenumber" />
+            <input type="hidden" asp-for="Alternatephonenumber" />
+            <input type="hidden" asp-for="Alternatephonenumber2" />
+            <input type="hidden" asp-for="Email" />
+            <input type="hidden" asp-for="Alternateemail" />
+            <input type="hidden" asp-for="Address" />
+            <input type="hidden" asp-for="City" />
+            <input type="hidden" asp-for="State" />
+            <input type="hidden" asp-for="Zip" />
+            <input type="hidden" asp-for="Expiration" />
+            <input type="hidden" asp-for="Yearofuse" />
+            <input type="hidden" asp-for="Rcimembernumber" />
+            <input type="hidden" asp-for="Rcipoints" />
+            <input type="hidden" asp-for="Rciyearofuse" />
+            <input type="hidden" asp-for="Rci1" />
+            <input type="hidden" asp-for="Rci2" />
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label"></label>
+                <input asp-for="Firstname" class="form-control" readonly />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label"></label>
+                <input asp-for="Lastname" class="form-control" readonly />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membernumber" class="control-label"></label>
+                <input asp-for="Membernumber" class="form-control" readonly />
+                <span asp-validation-for="Membernumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Viplevel" class="control-label"></label>
+                <input asp-for="Viplevel" class="form-control" readonly />
+                <span asp-validation-for="Viplevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Points" class="control-label"></label>
+                <input asp-for="Points" class="form-control" type="number" min="0" />
+                <span asp-validation-for="Points" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rateofpay" class="control-label"></label>
+                <input asp-for="Rateofpay" class="form-control" readonly />
+                <span asp-validation-for="Rateofpay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" readonly />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" readonly />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Guestpasses" class="control-label"></label>
+                <input asp-for="Guestpasses" class="form-control" type="number" min="0" />
+                <span asp-validation-for="Guestpasses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservationpasses" class="control-label"></label>
+                <input asp-for="Reservationpasses" class="form-control" type="number" min="0" />
+                <span asp-validation-for="Reservationpasses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wynresemail" class="control-label"></label>
+                <input asp-for="Wynresemail" class="form-control" readonly />
+                <span asp-validation-for="Wynresemail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

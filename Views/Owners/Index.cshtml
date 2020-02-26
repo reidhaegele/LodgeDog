@@ -1,0 +1,223 @@
+﻿@model IEnumerable<LodgeDogDB.Models.Owners>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeStamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fullservice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Signupdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Primarycontact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phonenumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alternatephonenumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alternatephonenumber2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alternateemail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Membernumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Viplevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expiration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Yearofuse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rcimembernumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rcipoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rciyearofuse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rateofpay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rci1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rci2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guestpasses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservationpasses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wynresemail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullservice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Signupdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Primarycontact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phonenumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alternatephonenumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alternatephonenumber2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alternateemail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Membernumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Viplevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Points)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expiration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yearofuse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rcimembernumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rcipoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rciyearofuse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rateofpay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rci1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rci2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guestpasses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservationpasses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wynresemail)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Number">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Number">Details</a> |
+                <a asp-controller="Bookings" asp-action="Index" asp-route-id="@item.Number">Bookings</a> |
+                <a asp-action="Delete" asp-route-id="@item.Number">Delete</a> |
+                <a asp-action="Use" asp-route-id="@item.Number">Use</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

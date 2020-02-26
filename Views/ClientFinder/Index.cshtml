@@ -1,0 +1,95 @@
+﻿@model IEnumerable<LodgeDogDB.Models.PointsGroup>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="ClientFinder" asp-action="Index" method="get">
+    <p>
+        Actual Points: <input type="number" name="actual" step="1000">
+        <input type="submit" value="Find Clients" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Membernumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Viplevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rateofpay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guestpasses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservationpasses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Compatibility)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Membernumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Viplevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Points)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rateofpay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guestpasses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservationpasses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Compatibility)
+            </td>
+            <td>
+                <a asp-controller="Owners" asp-action="Edit" asp-route-id="@item.Number">Edit</a> |
+                <a asp-controller="Owners" asp-action="Details" asp-route-id="@item.Number">Details</a> |
+                <a asp-controller="Owners" asp-action="Delete" asp-route-id="@item.Number">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
