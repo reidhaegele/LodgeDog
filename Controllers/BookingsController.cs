@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LodgeDogDB.Context;
 using LodgeDogDB.Models;
+using System.Collections;
 
 namespace LodgeDogDB.Controllers
 {
@@ -91,7 +92,89 @@ namespace LodgeDogDB.Controllers
             double sum = 0.0;
             foreach (Bookings booking in mySampleDatabaseContext)
             {
-                sum += (double)(booking.Baserateofpay * (booking.Pointsused / 1000));
+                double ppt = (double)(booking.Pointsused) / 1000.0;
+                sum += (double)(booking.Baserateofpay * ppt);
+            }
+            ViewData["sum"] = sum;
+            return View(await mySampleDatabaseContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Printer(int id, int month, string inout)
+        {
+            var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);
+            Owners owner = _context.Owners.Find(id);
+
+            ViewData["Name"] = owner.Firstname + " " + owner.Lastname;
+            ViewData["Address"] = owner.Address;
+            ViewData["CSZ"] = owner.City + ", " + owner.State + " " + owner.Zip;
+
+            if (inout == null)
+            {
+
+            }
+            else
+            {
+                string m;
+                switch (month)
+                {
+                    case 1:
+                        m = "January";
+                        break;
+                    case 2:
+                        m = "February";
+                        break;
+                    case 3:
+                        m = "March";
+                        break;
+                    case 4:
+                        m = "April";
+                        break;
+                    case 5:
+                        m = "May";
+                        break;
+                    case 6:
+                        m = "June";
+                        break;
+                    case 7:
+                        m = "July";
+                        break;
+                    case 8:
+                        m = "August";
+                        break;
+                    case 9:
+                        m = "September";
+                        break;
+                    case 10:
+                        m = "October";
+                        break;
+                    case 11:
+                        m = "November";
+                        break;
+                    case 12:
+                        m = "December";
+                        break;
+                    default:
+                        m = "January";
+                        break;
+                }
+                ViewData["month"] = m;
+                if (inout.Equals("in"))
+                {
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkin.Value.Month == month);
+                }
+                else if (inout.Equals("out"))
+                {
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkout.Value.Month == month);
+                }
+            }
+            ArrayList indivSums = new ArrayList();
+            double sum = 0.0;
+            foreach (Bookings booking in mySampleDatabaseContext)
+            {
+                double ppt = (double)(booking.Pointsused) / 1000.0;
+                ppt = (double)(booking.Baserateofpay * ppt);
+                indivSums.Add(ppt);
+                sum += ppt;
             }
             ViewData["sum"] = sum;
             return View(await mySampleDatabaseContext.ToListAsync());
