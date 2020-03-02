@@ -41,16 +41,24 @@
             int sumPoints = 0;
         }
         @foreach (var item in Model)
-        {
+         {
             <tr class="print">
+                @{ double ppt = (double)(item.Pointsused) / 1000.0;
+                    ppt = (double)(item.Baserateofpay * ppt);
+                    sum += ppt;
+                    sumPoints += (int)item.Pointsused;
+                    string decimalString = ppt.ToString("C");
+                    string cin = item.Checkin.ToString("dd/MM/yyyy");
+                    string cout = item.Checkout.ToString("dd/MM/yyyy");
+                }
                 <td class="print">
                     @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
                 </td>
                 <td class="print">
-                    @Html.DisplayFor(modelItem => item.Checkin)
+                    @cin
                 </td>
                 <td class="print">
-                    @Html.DisplayFor(modelItem => item.Checkout)
+                    @cout
                 </td>
                 <td class="print">
                     @Html.DisplayFor(modelItem => item.Property)
@@ -61,12 +69,6 @@
                 <td class="print">
                     $@Html.DisplayFor(modelItem => item.Baserateofpay)/K
                 </td>
-                @{ double ppt = (double)(item.Pointsused) / 1000.0;
-                    ppt = (double)(item.Baserateofpay * ppt);
-                    sum += ppt;
-                    sumPoints += (int)item.Pointsused;
-                    string decimalString = ppt.ToString("C");
-                }
                 <td class="print">
                     @decimalString
                 </td>
@@ -77,7 +79,7 @@
                     @decimalString
                 </td>
             </tr>
-        }
+         }
         <tr class="print">
             <td colspan="7" rowspan="2" class="print">
                 Notes:

@@ -81,12 +81,12 @@ namespace LodgeDogDB.Controllers
                 if (inout.Equals("in"))
                 {
                     ViewData["inout"] = "Check-in";
-                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkin.Value.Month == month);
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkin.Month == month);
                 }
                 else if (inout.Equals("out"))
                 {
                     ViewData["inout"] = "Check-out";
-                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkout.Value.Month == month);
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkout.Month == month);
                 }
             }
             double sum = 0.0;
@@ -160,23 +160,13 @@ namespace LodgeDogDB.Controllers
                 ViewData["month"] = m;
                 if (inout.Equals("in"))
                 {
-                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkin.Value.Month == month);
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkin.Month == month);
                 }
                 else if (inout.Equals("out"))
                 {
-                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkout.Value.Month == month);
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkout.Month == month);
                 }
             }
-            ArrayList indivSums = new ArrayList();
-            double sum = 0.0;
-            foreach (Bookings booking in mySampleDatabaseContext)
-            {
-                double ppt = (double)(booking.Pointsused) / 1000.0;
-                ppt = (double)(booking.Baserateofpay * ppt);
-                indivSums.Add(ppt);
-                sum += ppt;
-            }
-            ViewData["sum"] = sum;
             return View(await mySampleDatabaseContext.ToListAsync());
         }
 
