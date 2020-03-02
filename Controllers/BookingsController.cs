@@ -166,10 +166,12 @@ namespace LodgeDogDB.Controllers
                 if (inout.Equals("in"))
                 {
                     mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkin.Month == month);
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Pointsused > 0);
                 }
                 else if (inout.Equals("out"))
                 {
                     mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkout.Month == month);
+                    mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Pointsused > 0);
                 }
             }
             return View(await mySampleDatabaseContext.ToListAsync());
