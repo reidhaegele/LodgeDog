@@ -3,7 +3,7 @@
 
 <p>@ViewData["Name"]<br />@ViewData["Address"]<br />@ViewData["CSZ"]</p>
 <table class="print">
-    <caption>@ViewData["month"]</caption>
+    <caption class="print">@ViewData["month"]</caption>
     <thead>
         <tr class="print">
             <th class="print">
@@ -33,7 +33,7 @@
             <th class="print">
                 Payout Due
             </th>
-        </tr class="print">
+        </tr>
     </thead>
     <tbody>
         @{
@@ -42,44 +42,44 @@
         }
         @foreach (var item in Model)
         {
-        <tr class="print">
-            <td class="print">
-                @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
-            </td>
-            <td class="print">
-                @Html.DisplayFor(modelItem => item.Checkin)
-            </td>
-            <td class="print">
-                @Html.DisplayFor(modelItem => item.Checkout)
-            </td>
-            <td class="print">
-                @Html.DisplayFor(modelItem => item.Property)
-            </td>
-            <td class="print">
-                @Html.DisplayFor(modelItem => item.Pointsused)
-            </td>
-            <td class="print">
-                $@Html.DisplayFor(modelItem => item.Baserateofpay)/K
-            </td>
-            @{ double ppt = (double)(item.Pointsused) / 1000.0;
-                ppt = (double)(item.Baserateofpay * ppt);
-                sum += ppt;
-                sumPoints += (int)item.Pointsused;
-                string decimalString = ppt.ToString("C");
-            }
-            <td class="print">
-                $@decimalString
-            </td>
-            <td class="print">
-                $0
-            </td>
-            <td class="print">
-                $@decimalString
-            </td>
-        </tr>
+            <tr class="print">
+                <td class="print">
+                    @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
+                </td>
+                <td class="print">
+                    @Html.DisplayFor(modelItem => item.Checkin)
+                </td>
+                <td class="print">
+                    @Html.DisplayFor(modelItem => item.Checkout)
+                </td>
+                <td class="print">
+                    @Html.DisplayFor(modelItem => item.Property)
+                </td>
+                <td class="print">
+                    @Html.DisplayFor(modelItem => item.Pointsused)
+                </td>
+                <td class="print">
+                    $@Html.DisplayFor(modelItem => item.Baserateofpay)/K
+                </td>
+                @{ double ppt = (double)(item.Pointsused) / 1000.0;
+                    ppt = (double)(item.Baserateofpay * ppt);
+                    sum += ppt;
+                    sumPoints += (int)item.Pointsused;
+                    string decimalString = ppt.ToString("C");
+                }
+                <td class="print">
+                    @decimalString
+                </td>
+                <td class="print">
+                    $0
+                </td>
+                <td class="print">
+                    @decimalString
+                </td>
+            </tr>
         }
         <tr class="print">
-            <td rowspan="2" class="print">
+            <td colspan="7" rowspan="2" class="print">
                 Notes:
             </td>
             <th class="print">
@@ -89,14 +89,12 @@
                 Total Payout
             </th>
         </tr>
+        @{
+            string decimalSum = sum.ToString("C");
+        }
         <tr class="print">
-            @sumPoints
-        </tr>
-            @{ 
-                string decimalSum = sum.ToString("C");
-            }
-        <tr class="print">
-            $@sum
+            <td class="print">@sumPoints</td>
+            <td class="print">@decimalSum</td>
         </tr>
     </tbody>
 </table>

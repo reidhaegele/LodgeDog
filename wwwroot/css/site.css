@@ -77,7 +77,7 @@ table.print {
     border-collapse: collapse;
     border: 1px solid black;
 }
-tr, caption, td, th.print {
+tr, td, th.print {
     text-align: center;
     color: black;
     border: 1px solid black;
