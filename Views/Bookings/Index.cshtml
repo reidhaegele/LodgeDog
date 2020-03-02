@@ -6,45 +6,56 @@
 
     <h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            <label for="inout">Check-in/Check-out:</label>
+            <div>
+                <label for="inout">Check-in/Check-out:</label>
 
-            <select name="inout" id="inout" value="@ViewData["inout"]">
-                <option value="in">Check-in</option>
-                <option value="out">Check-out</option>
-            </select>
-
-            <label for="month">Choose a month:</label>
-
-            <select name="month" id="month" value="@ViewData["month"]">
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-
-            <input type="submit" value="Search"/> |
-            <a asp-action="Index">Back to Full List</a>
+                <select name="inout" id="inout">
+                    <option value="in">Check-in</option>
+                    <option value="out">Check-out</option>
+                </select>
+            </div>
+            <div>
+                <label for="paragraph">Paragraph for printer:</label>
+                <br />
+                <textarea name="paragraph" id="paragraph" cols="130" rows="4">Back to school again! September brings the anticipation of fall which is a great time to see someplace new and explore the outdoors, or shuffle the kids to school and soccer practice! As we prepare to ace this school year we want to take a moment to thank you for your continued partnership with us and other owners to make timeshare ownership a little better than it was before. See you next month!</textarea>
+            </div>
+            <div>
+                <label for="month">Choose a month:</label>
+                <br />
+                <select name="month" id="month">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Search" /> |
+                <input type="submit" value="Print" asp-action="Printer" asp-route-id="@ViewData["Owner"]"/> |
+                <br />
+                <a asp-action="Index">Back to Full List</a>
+            </div>
         </p>
     </div>
 </form>
 <div>
     <p>Payout for Owner: $@ViewData["sum"]</p><br />
-    <p>Results for <b>@ViewData["month"]</b> based on <b>@ViewData["inout"]</b></p>
+    <p>Results for <b>@ViewData["m"]</b> based on <b>Check-@ViewData["inout"]</b></p>
 </div>
 
 <table class="table">

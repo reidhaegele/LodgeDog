@@ -25,7 +25,8 @@ namespace LodgeDogDB.Controllers
         {
             var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);
             Owners owner = _context.Owners.Find(id);
-            
+
+            ViewData["Owner"] = id;
             ViewData["Title"] = owner.Firstname + " " + owner.Lastname;
 
             if (inout == null)
@@ -77,15 +78,16 @@ namespace LodgeDogDB.Controllers
                         m = "January";
                         break;
                 }
-                ViewData["month"] = m;
+                ViewData["m"] = m;
+                ViewData["month"] = month;
                 if (inout.Equals("in"))
                 {
-                    ViewData["inout"] = "Check-in";
+                    ViewData["inout"] = "in";
                     mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkin.Month == month);
                 }
                 else if (inout.Equals("out"))
                 {
-                    ViewData["inout"] = "Check-out";
+                    ViewData["inout"] = "out";
                     mySampleDatabaseContext = mySampleDatabaseContext.Where(b => b.Checkout.Month == month);
                 }
             }
@@ -99,12 +101,15 @@ namespace LodgeDogDB.Controllers
             return View(await mySampleDatabaseContext.ToListAsync());
         }
 
-        public async Task<IActionResult> Printer(int id, int month, string inout)
+        public async Task<IActionResult> Printer(int id, int month, string inout, string paragraph)
         {
             var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);
             Owners owner = _context.Owners.Find(id);
 
+            ViewData["Owner"] = id;
+            ViewData["Paragraph"] = paragraph;
             ViewData["Name"] = owner.Firstname + " " + owner.Lastname;
+            ViewData["fName"] = owner.Firstname;
             ViewData["Address"] = owner.Address;
             ViewData["CSZ"] = owner.City + ", " + owner.State + " " + owner.Zip;
 

@@ -71,7 +71,7 @@ body {
 }
 
 table.print {
-    width: auto;
+    width: 75%;
     text-align: center;
     color: black;
     border-collapse: collapse;
@@ -81,11 +81,13 @@ tr, td, th.print {
     text-align: center;
     color: black;
     border: 1px solid black;
+    padding: 3px;
 }
 caption.print {
     text-align: center;
     font-weight: bold;
     color: black;
     border: 1px solid black;
+    border-bottom: hidden;
     caption-side: top;
 }

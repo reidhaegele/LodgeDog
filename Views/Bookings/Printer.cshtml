@@ -1,102 +1,105 @@
 ﻿@model IEnumerable<LodgeDogDB.Models.Bookings>
 
+    <div>
+        <p>&emsp;@ViewData["Name"]<br />&emsp;@ViewData["Address"]<br />&emsp;@ViewData["CSZ"]<br /></p>
+        <p style="width:75%">Hello @ViewData["fName"]<br /><br />@ViewData["Paragraph"]<br /></p>
 
-<p>@ViewData["Name"]<br />@ViewData["Address"]<br />@ViewData["CSZ"]</p>
-<table class="print">
-    <caption class="print">@ViewData["month"]</caption>
-    <thead>
-        <tr class="print">
-            <th class="print">
-                Confirm#
-            </th>
-            <th class="print">
-                Check In
-            </th>
-            <th class="print">
-                Check out
-            </th>
-            <th class="print">
-                Resort
-            </th>
-            <th class="print">
-                Points
-            </th>
-            <th class="print">
-                Price
-            </th>
-            <th class="print">
-                Payout
-            </th>
-            <th class="print">
-                Balance
-            </th>
-            <th class="print">
-                Payout Due
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            double sum = 0;
-            int sumPoints = 0;
-        }
-        @foreach (var item in Model)
-         {
-            <tr class="print">
-                @{ double ppt = (double)(item.Pointsused) / 1000.0;
-                    ppt = (double)(item.Baserateofpay * ppt);
-                    sum += ppt;
-                    sumPoints += (int)item.Pointsused;
-                    string decimalString = ppt.ToString("C");
-                    string cin = item.Checkin.ToString("dd/MM/yyyy");
-                    string cout = item.Checkout.ToString("dd/MM/yyyy");
+        <table class="print">
+            <caption class="print">@ViewData["month"]</caption>
+            <thead>
+                <tr class="print">
+                    <th class="print">
+                        Confirm#
+                    </th>
+                    <th class="print">
+                        Check In
+                    </th>
+                    <th class="print">
+                        Check out
+                    </th>
+                    <th class="print">
+                        Resort
+                    </th>
+                    <th class="print">
+                        Points
+                    </th>
+                    <th class="print">
+                        Price
+                    </th>
+                    <th class="print">
+                        Payout
+                    </th>
+                    <th class="print">
+                        Balance
+                    </th>
+                    <th class="print">
+                        Payout Due
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    double sum = 0;
+                    int sumPoints = 0;
                 }
-                <td class="print">
-                    @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
-                </td>
-                <td class="print">
-                    @cin
-                </td>
-                <td class="print">
-                    @cout
-                </td>
-                <td class="print">
-                    @Html.DisplayFor(modelItem => item.Property)
-                </td>
-                <td class="print">
-                    @Html.DisplayFor(modelItem => item.Pointsused)
-                </td>
-                <td class="print">
-                    $@Html.DisplayFor(modelItem => item.Baserateofpay)/K
-                </td>
-                <td class="print">
-                    @decimalString
-                </td>
-                <td class="print">
-                    $0
-                </td>
-                <td class="print">
-                    @decimalString
-                </td>
-            </tr>
-         }
-        <tr class="print">
-            <td colspan="7" rowspan="2" class="print">
-                Notes:
-            </td>
-            <th class="print">
-                Total Points
-            </th>
-            <th class="print">
-                Total Payout
-            </th>
-        </tr>
-        @{
-            string decimalSum = sum.ToString("C");
-        }
-        <tr class="print">
-            <td class="print">@sumPoints</td>
-            <td class="print">@decimalSum</td>
-        </tr>
-    </tbody>
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr class="print">
+                        @{ double ppt = (double)(item.Pointsused) / 1000.0;
+                            ppt = (double)(item.Baserateofpay * ppt);
+                            sum += ppt;
+                            sumPoints += (int)item.Pointsused;
+                            string decimalString = ppt.ToString("C");
+                            string cin = item.Checkin.ToString("dd/MM/yyyy");
+                            string cout = item.Checkout.ToString("dd/MM/yyyy");
+                        }
+                        <td class="print">
+                            @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
+                        </td>
+                        <td class="print">
+                            @cin
+                        </td>
+                        <td class="print">
+                            @cout
+                        </td>
+                        <td class="print">
+                            @Html.DisplayFor(modelItem => item.Property)
+                        </td>
+                        <td class="print">
+                            @Html.DisplayFor(modelItem => item.Pointsused)
+                        </td>
+                        <td class="print">
+                            $@Html.DisplayFor(modelItem => item.Baserateofpay)/K
+                        </td>
+                        <td class="print">
+                            @decimalString
+                        </td>
+                        <td class="print">
+                            $0
+                        </td>
+                        <td class="print">
+                            @decimalString
+                        </td>
+                    </tr>
+                }
+                <tr class="print">
+                    <td colspan="7" rowspan="2" class="print" style="text-align:left">
+                        Notes:
+                    </td>
+                    <th class="print">
+                        Total Points
+                    </th>
+                    <th class="print">
+                        Total Payout
+                    </th>
+                </tr>
+                @{
+                    string decimalSum = sum.ToString("C");
+                }
+                <tr class="print">
+                    <td class="print">@sumPoints</td>
+                    <td class="print">@decimalSum</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
