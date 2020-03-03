@@ -106,6 +106,7 @@ namespace LodgeDogDB.Controllers
             var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);
             Owners owner = _context.Owners.Find(id);
 
+            ViewData["Current"] = DateTime.Today.ToString("D");
             ViewData["Owner"] = id;
             ViewData["Paragraph"] = paragraph;
             ViewData["Name"] = owner.Firstname + " " + owner.Lastname;

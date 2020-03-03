@@ -1,14 +1,20 @@
 ﻿@model IEnumerable<LodgeDogDB.Models.Bookings>
-
+@{
+//Layout = "";
+}
+    <header>
+        <div style="overflow: hidden;width: 100%;">
+            <p style="float: left;font-size: 20px;">Questions? 877-808-8286</p>
+            <p style="float: right;font-size: 20px;">@ViewData["Current"] - Starting Balance: $0</p>
+        </div>
+    </header>
     <div>
         <br /><br /><br />
         <br /><br /><br />
-        <br /><br /><br />
-        <br /><br /><br />
-        <br /><br /><br />
-        <br /><br /><br />
-        <p>&emsp;@ViewData["Name"]<br />&emsp;@ViewData["Address"]<br />&emsp;@ViewData["CSZ"]<br /><br /></p>
-        <p style="width:75%">Hello @ViewData["fName"],<br /><br />@ViewData["Paragraph"]<br /></p>
+        <br /><br /><br /><br />
+        <p style="font-size: 20px;">&emsp;@ViewData["Name"]<br />&emsp;@ViewData["Address"]<br />&emsp;@ViewData["CSZ"]<br /><br /></p>
+        <p class="print" style="line-height:0.2 !important;">Hello @ViewData["fName"],</p>
+        <p class="print">@ViewData["Paragraph"]<br /></p>
 
         <table class="print">
             <caption class="print">@ViewData["month"]</caption>
@@ -58,9 +64,13 @@
                             string decimalString = ppt.ToString("C");
                             string cin = item.Checkin.ToString("dd/MM/yyyy");
                             string cout = item.Checkout.ToString("dd/MM/yyyy");
+                            int points = (int)item.Pointsused;
+                            string ps = points.ToString("N0");
+                            string rc = item.Wyndhamconfirmationnumber.Substring(0, 8);
+                            string br = item.Wyndhamconfirmationnumber.Substring(8, 7);
                         }
                         <td class="print">
-                            @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
+                            @rc<br />@br
                         </td>
                         <td class="print">
                             @cin
@@ -72,7 +82,7 @@
                             @Html.DisplayFor(modelItem => item.Property)
                         </td>
                         <td class="print">
-                            @Html.DisplayFor(modelItem => item.Pointsused)
+                            @ps
                         </td>
                         <td class="print">
                             $@Html.DisplayFor(modelItem => item.Baserateofpay)/K
@@ -101,9 +111,10 @@
                 </tr>
                 @{
                     string decimalSum = sum.ToString("C");
+                    string sPoints = sumPoints.ToString("N0");
                 }
                 <tr class="print">
-                    <td class="print">@sumPoints</td>
+                    <td class="print">@sPoints</td>
                     <td class="print">@decimalSum</td>
                 </tr>
             </tbody>
