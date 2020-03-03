@@ -21,12 +21,21 @@ namespace LodgeDogDB.Controllers
         }
 
         // GET: Owners
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int? pageNumber)
         {
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
             var owners = from o in _context.Owners
                        select o;
-
-            return View(await _context.Owners.ToListAsync());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                owners = owners.Where(o => o.Firstname.Contains(searchString)
+                                       || o.Lastname.Contains(searchString));
+            }
+            int pageSize = 2;
+            return View(await PaginatedList<Owners>.CreateAsync(owners.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Owners/Details/5
