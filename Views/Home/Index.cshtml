@@ -6,6 +6,16 @@
 <p>
     <a href="Owners">List All Owners</a><br />
 </p>
+
+<form asp-controller="Owners" asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" />
+            <input type="submit" value="Search" />
+        </p>
+    </div>
+</form>
+
 <form asp-controller="ClientFinder" asp-action="Index" method="get">
     <p>
         Actual Points: <input type="number" name="actual" step="1000">
