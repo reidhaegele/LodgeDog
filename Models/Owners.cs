@@ -8,6 +8,7 @@ namespace LodgeDogDB.Models
         public Owners()
         {
             Bookings = new HashSet<Bookings>();
+            Notes = new HashSet<Notes>();
         }
 
         public int Number { get; set; }
@@ -44,5 +45,6 @@ namespace LodgeDogDB.Models
         public string Wynresemail { get; set; }
 
         public virtual ICollection<Bookings> Bookings { get; set; }
+        public virtual ICollection<Notes> Notes { get; set; }
     }
 }

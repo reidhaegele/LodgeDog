@@ -99,3 +99,13 @@ p.print {
     line-height: 1.5;
     font-size: 20px;
 }
+
+.row {
+    display: flex;
+    flex-wrap: nowrap
+}
+
+.column {
+    flex: 50%;
+    flex-wrap: nowrap
+}

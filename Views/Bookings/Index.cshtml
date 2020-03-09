@@ -2,57 +2,108 @@
 
 @{
     //ViewData["Title"] = "Index";
+    var notes = ViewBag.Notes;
+    
 }
 
-    <h1>@ViewData["Title"]</h1>
+<h1>@ViewData["Title"]</h1>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            <div>
-                <label for="inout">Check-in/Check-out:</label>
+<div class="row">
+    <div class="column">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    <div>
+                        <label for="inout">Check-in/Check-out:</label>
 
-                <select name="inout" id="inout">
-                    <option value="in">Check-in</option>
-                    <option value="out">Check-out</option>
-                </select>
+                        <select name="inout" id="inout">
+                            <option value="in">Check-in</option>
+                            <option value="out">Check-out</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="paragraph">Paragraph for printer:</label>
+                        <br />
+                        <textarea name="paragraph" id="paragraph" cols="130" rows="4">Back to school again! September brings the anticipation of fall which is a great time to see someplace new and explore the outdoors, or shuffle the kids to school and soccer practice! As we prepare to ace this school year we want to take a moment to thank you for your continued partnership with us and other owners to make timeshare ownership a little better than it was before. See you next month!</textarea>
+                    </div>
+                    <div>
+                        <label for="month">Choose a month:</label>
+                        <br />
+                        <select name="month" id="month">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="submit" value="Search" /> |
+                        <input type="submit" value="Print" asp-action="Printer" asp-route-id="@ViewData["Owner"]" /> |
+                        <br />
+                        <a asp-action="Index">Back to Full List</a>
+                    </div>
+                </p>
             </div>
-            <div>
-                <label for="paragraph">Paragraph for printer:</label>
-                <br />
-                <textarea name="paragraph" id="paragraph" cols="130" rows="4">Back to school again! September brings the anticipation of fall which is a great time to see someplace new and explore the outdoors, or shuffle the kids to school and soccer practice! As we prepare to ace this school year we want to take a moment to thank you for your continued partnership with us and other owners to make timeshare ownership a little better than it was before. See you next month!</textarea>
-            </div>
-            <div>
-                <label for="month">Choose a month:</label>
-                <br />
-                <select name="month" id="month">
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-            </div>
-            <div>
-                <input type="submit" value="Search" /> |
-                <input type="submit" value="Print" asp-action="Printer" asp-route-id="@ViewData["Owner"]"/> |
-                <br />
-                <a asp-action="Index">Back to Full List</a>
-            </div>
-        </p>
+        </form>
     </div>
-</form>
+    <div class="column">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Note
+                    </th>
+                    <th>
+                        Time Stamp
+                    </th>
+                    <th>
+                        Reason
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Number
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var note in notes)
+                {
+                    <tr>
+                        <td>
+                            @note.Note
+                        </td>
+                        <td>
+                            @note.TimeStamp
+                        </td>
+                        <td>
+                            @note.Reason
+                        </td>
+                        <td>
+                            @note.Name
+                        </td>
+                        <td>
+                            @note.Number
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 <div>
     <p>Payout for Owner: $@ViewData["sum"]</p><br />
     <p>Results for <b>@ViewData["m"]</b> based on <b>Check-@ViewData["inout"]</b></p>
@@ -62,125 +113,126 @@
     <thead>
         <tr>
             <th>
-                 Source)
+                Source
             </th>
             <th>
-                 Primaryguestname)
+                Primaryguestname
             </th>
             <th>
-                 Numberofoccupants)
+                Numberofoccupants
             </th>
             <th>
-                 Property)
+                Property
             </th>
             <th>
-                 Unittype)
+                Unittype
             </th>
             <th>
-                 Datebookingmade)
+                Datebookingmade
             </th>
             <th>
-                 Checkin)
+                Checkin
             </th>
             <th>
-                 Checkout)
+                Checkout
             </th>
             <th>
-                 Baserateofpay)
+                Baserateofpay
             </th>
             <th>
-                 Rci)
+                Rci
             </th>
             <th>
-                 Tri)
+                Tri
             </th>
             <th>
-                 Pointsused)
+                Pointsused
             </th>
             <th>
-                 Reservationpassesneeded)
+                Reservationpassesneeded
             </th>
             <th>
-                 Reservationpassespurchased)
+                Reservationpassespurchased
             </th>
             <th>
-                 Guestpassesadded)
+                Guestpassesadded
             </th>
             <th>
-                 Guestpassespurchased)
+                Guestpassespurchased
             </th>
             <th>
-                 Wyndhamconfirmationnumber)
+                Wyndhamconfirmationnumber
             </th>
             <th>
-                 NumberNavigation)
+                NumberNavigation
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Source)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Primaryguestname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numberofoccupants)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Property)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unittype)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Datebookingmade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Checkin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Checkout)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Baserateofpay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rci)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pointsused)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reservationpassesneeded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reservationpassespurchased)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Guestpassesadded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Guestpassespurchased)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberNavigation.Number)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.TimeStamp  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.TimeStamp  }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.TimeStamp  })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Source)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Primaryguestname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numberofoccupants)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Property)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unittype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datebookingmade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Checkin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Checkout)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Baserateofpay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rci)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tri)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pointsused)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reservationpassesneeded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reservationpassespurchased)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guestpassesadded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guestpassespurchased)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberNavigation.Number)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TimeStamp }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TimeStamp }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TimeStamp })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -24,8 +24,10 @@ namespace LodgeDogDB.Controllers
         public async Task<IActionResult> Index(int id, int month, string inout)
         {
             var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);
+            var notes = _context.Notes.Include(b => b.NumberNavigation).Where(b => b.Number == id).ToList<Notes>();
             Owners owner = _context.Owners.Find(id);
 
+            ViewBag.Notes = notes;
             ViewData["Owner"] = id;
             ViewData["Title"] = owner.Firstname + " " + owner.Lastname;
 
@@ -103,9 +105,9 @@ namespace LodgeDogDB.Controllers
 
         public async Task<IActionResult> Printer(int id, int month, string inout, string paragraph)
         {
-            var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);
+            var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);            
             Owners owner = _context.Owners.Find(id);
-
+            
             ViewData["Current"] = DateTime.Today.ToString("D");
             ViewData["Owner"] = id;
             ViewData["Paragraph"] = paragraph;

@@ -24,6 +24,7 @@ namespace LodgeDogDB.Context
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Bookings> Bookings { get; set; }
+        public virtual DbSet<Notes> Notes { get; set; }
         public virtual DbSet<Owners> Owners { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -221,6 +222,38 @@ namespace LodgeDogDB.Context
                     .HasForeignKey(d => d.Number)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__bookings__NUMBER__1AD3FDA4");
+            });
+
+            modelBuilder.Entity<Notes>(entity =>
+            {
+                entity.HasKey(e => e.TimeStamp)
+                    .HasName("PK__notes__69497B34C219D827");
+
+                entity.ToTable("notes");
+
+                entity.Property(e => e.TimeStamp).HasColumnName("TIME_STAMP");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("NAME")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Note)
+                    .HasColumnName("NOTE")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Number).HasColumnName("NUMBER");
+
+                entity.Property(e => e.Reason)
+                    .HasColumnName("REASON")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.NumberNavigation)
+                    .WithMany(p => p.Notes)
+                    .HasForeignKey(d => d.Number)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Owners>(entity =>
