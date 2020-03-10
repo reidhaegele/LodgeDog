@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LodgeDogDB.Models.Notes>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberNavigation.Number)
+            </td>
+            <td>
+                @{
+                    var stamp = item.TimeStamp.ToString("s");
+                }
+                <a asp-controller="Notes" asp-action="Edit" asp-route-id="@stamp">Edit</a> |
+                <a asp-controller="Notes" asp-action="Details" asp-route-id="@stamp">Details</a> |
+                <a asp-controller="Notes" asp-action="Delete" asp-route-id="@stamp">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

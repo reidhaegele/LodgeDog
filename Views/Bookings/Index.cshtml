@@ -28,7 +28,7 @@
                     <div>
                         <label for="paragraph">Paragraph for printer:</label>
                         <br />
-                        <textarea name="paragraph" id="paragraph" cols="130" rows="4">Back to school again! September brings the anticipation of fall which is a great time to see someplace new and explore the outdoors, or shuffle the kids to school and soccer practice! As we prepare to ace this school year we want to take a moment to thank you for your continued partnership with us and other owners to make timeshare ownership a little better than it was before. See you next month!</textarea>
+                        <textarea name="paragraph" id="paragraph" cols="120" rows="4">Back to school again! September brings the anticipation of fall which is a great time to see someplace new and explore the outdoors, or shuffle the kids to school and soccer practice! As we prepare to ace this school year we want to take a moment to thank you for your continued partnership with us and other owners to make timeshare ownership a little better than it was before. See you next month!</textarea>
                     </div>
                     <div>
                         <label for="month">Choose a month:</label>
@@ -98,10 +98,19 @@
                         <td>
                             @note.Number
                         </td>
+                        <td>
+                            @{
+                                var stamp = note.TimeStamp.ToString("s");
+                            }
+                            <a asp-controller="Notes" asp-action="Edit" asp-route-id="@stamp">Edit</a> |
+                            <a asp-controller="Notes" asp-action="Details" asp-route-id="@stamp">Details</a> |
+                            <a asp-controller="Notes" asp-action="Delete" asp-route-id="@stamp">Delete</a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
+        <a asp-controller="Notes" asp-action="Create">Create new note</a>
     </div>
 </div>
 <div>
