@@ -121,6 +121,9 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @{
+        var stamp = Model.TimeStamp.ToString("s");
+    }
+    @Html.ActionLink("Edit", "Edit", new { id = stamp, num = Model.NumberNavigation.Number }) |
+    <a asp-action="Index" asp-route-id="@Model.NumberNavigation.Number">Back to List</a>
 </div>

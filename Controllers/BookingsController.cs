@@ -180,9 +180,29 @@ namespace LodgeDogDB.Controllers
             return View(await mySampleDatabaseContext.ToListAsync());
         }
 
-        // GET: Bookings/Create
-        public IActionResult Create()
+        // GET: Bookings/Details/5
+        public async Task<IActionResult> Details(DateTime? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var bookings = await _context.Bookings
+                .Include(n => n.NumberNavigation)
+                .FirstOrDefaultAsync(m => m.TimeStamp == id);
+            if (bookings == null)
+            {
+                return NotFound();
+            }
+
+            return View(bookings);
+        }
+
+        // GET: Bookings/Create
+        public IActionResult Create(int id)
+        {
+            ViewData["Owner"] = id;
             ViewData["Number"] = new SelectList(_context.Owners, "Number", "Number");
             return View();
         }
@@ -192,27 +212,29 @@ namespace LodgeDogDB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TimeStamp,Source,Primaryguestname,Numberofoccupants,Property,Unittype,Datebookingmade,Checkin,Checkout,Number,Baserateofpay,Rci,Tri,Pointsused,Reservationpassesneeded,Reservationpassespurchased,Guestpassesadded,Guestpassespurchased,Wyndhamconfirmationnumber")] Bookings bookings)
+        public async Task<IActionResult> Create(int id, [Bind("TimeStamp,Source,Primaryguestname,Numberofoccupants,Property,Unittype,Datebookingmade,Checkin,Checkout,Number,Baserateofpay,Rci,Tri,Pointsused,Reservationpassesneeded,Reservationpassespurchased,Guestpassesadded,Guestpassespurchased,Wyndhamconfirmationnumber")] Bookings bookings)
         {
+            ViewData["Owner"] = id;
+            int ownerNum = id;
             if (ModelState.IsValid)
             {
                 _context.Add(bookings);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = ownerNum });
             }
             ViewData["Number"] = new SelectList(_context.Owners, "Number", "Number", bookings.Number);
             return View(bookings);
         }
 
         // GET: Bookings/Edit/5
-        public async Task<IActionResult> Edit(DateTime? id)
+        public async Task<IActionResult> Edit(DateTime? id, int num)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var bookings = await _context.Bookings.FindAsync(id);
+            var bookings = await _context.Bookings.FindAsync(id, num);
             if (bookings == null)
             {
                 return NotFound();
@@ -226,7 +248,7 @@ namespace LodgeDogDB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(DateTime id, [Bind("TimeStamp,Source,Primaryguestname,Numberofoccupants,Property,Unittype,Datebookingmade,Checkin,Checkout,Number,Baserateofpay,Rci,Tri,Pointsused,Reservationpassesneeded,Reservationpassespurchased,Guestpassesadded,Guestpassespurchased,Wyndhamconfirmationnumber")] Bookings bookings)
+        public async Task<IActionResult> Edit(DateTime id, int num, [Bind("TimeStamp,Source,Primaryguestname,Numberofoccupants,Property,Unittype,Datebookingmade,Checkin,Checkout,Number,Baserateofpay,Rci,Tri,Pointsused,Reservationpassesneeded,Reservationpassespurchased,Guestpassesadded,Guestpassespurchased,Wyndhamconfirmationnumber")] Bookings bookings)
         {
             if (id != bookings.TimeStamp)
             {
@@ -251,7 +273,7 @@ namespace LodgeDogDB.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = num });
             }
             ViewData["Number"] = new SelectList(_context.Owners, "Number", "Number", bookings.Number);
             return View(bookings);
@@ -264,7 +286,7 @@ namespace LodgeDogDB.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["date"] = id;
             var bookings = await _context.Bookings
                 .Include(b => b.NumberNavigation)
                 .FirstOrDefaultAsync(m => m.TimeStamp == id);
@@ -279,12 +301,12 @@ namespace LodgeDogDB.Controllers
         // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(DateTime id)
+        public async Task<IActionResult> DeleteConfirmed(DateTime id, int num)
         {
-            var bookings = await _context.Bookings.FindAsync(id);
+            var bookings = await _context.Bookings.FindAsync(id, num);
             _context.Bookings.Remove(bookings);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = num });
         }
 
         private bool BookingsExists(DateTime id)

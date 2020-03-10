@@ -99,14 +99,17 @@
                 <input asp-for="Wyndhamconfirmationnumber" class="form-control" />
                 <span asp-validation-for="Wyndhamconfirmationnumber" class="text-danger"></span>
             </div>
+            @{
+                var stamp = Model.TimeStamp.ToString("s");
+            }
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" asp-route-id="@stamp" asp-route-num="@Model.Number" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-id="@Model.Number">Back to List</a>
 </div>
 

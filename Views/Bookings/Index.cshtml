@@ -9,7 +9,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-route-id="@ViewData["Owner"]">Create New</a>
 </p>
 
 <div class="row">
@@ -50,7 +50,7 @@
                     </div>
                     <div>
                         <input type="submit" value="Search" /> |
-                        <input type="submit" value="Print" asp-action="Printer" asp-route-id="@ViewData["Owner"]" /> |
+                        <input type="submit" value="Print" asp-action="Printer" asp-route-id="@ViewData["Owner"]" />
                         <br />
                         <a asp-action="Index">Back to Full List</a>
                     </div>
@@ -237,9 +237,12 @@
                     @Html.DisplayFor(modelItem => item.NumberNavigation.Number)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.TimeStamp }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.TimeStamp }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TimeStamp })
+                    @{
+                        var stamp2 = item.TimeStamp.ToString("s");
+                    }
+                    <a asp-action="Edit" asp-route-id="@stamp2" asp-route-num="@item.NumberNavigation.Number">Edit</a> |
+                    <a asp-action="Details"  asp-route-id="@stamp2" asp-route-num="@item.NumberNavigation.Number">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@stamp2" asp-route-num="@item.NumberNavigation.Number">Delete</a>
                 </td>
             </tr>
         }
