@@ -132,9 +132,12 @@
                 @Html.DisplayFor(modelItem => item.NumberNavigation.Number)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @{
+                    var stamp2 = item.TimeStamp.ToString("s");
+                }
+                <a asp-action="Edit" asp-route-id="@stamp2" asp-route-num="@item.NumberNavigation.Number">Edit</a> |
+                <a asp-action="Details" asp-route-id="@stamp2" asp-route-num="@item.NumberNavigation.Number">Details</a> |
+                <a asp-action="Delete" asp-route-id="@stamp2" asp-route-num="@item.NumberNavigation.Number">Delete</a>
             </td>
         </tr>
 }
