@@ -20,7 +20,22 @@ namespace LodgeDogDB.Controllers
             _context = context;
         }
 
-        // GET: Bookings
+        public async Task<IActionResult> Search(string searchString, int? Number)
+        {
+            var bookings = from o in _context.Bookings
+                         select o;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                bookings = bookings.Where(b => b.Primaryguestname.Contains(searchString));
+            }
+            if (Number != null)
+            {
+                bookings = bookings.Where(b => b.Number == Number);
+            }
+            ViewBag.ownerNum = new SelectList(_context.Owners, "Number", "Number");
+            return View(await bookings.ToListAsync());
+        }
+
         public async Task<IActionResult> Index(int id, int month, string inout)
         {
             var mySampleDatabaseContext = _context.Bookings.Include(b => b.NumberNavigation).Where(b => b.Number == id);

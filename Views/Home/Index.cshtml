@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
@@ -10,7 +9,18 @@
 <form asp-controller="Owners" asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by name: <input type="text" name="SearchString" />
+            Find owner by name: <input type="text" name="SearchString" />
+            <input type="submit" value="Search" />
+        </p>
+    </div>
+</form>
+
+<form asp-controller="Bookings" asp-action="Search" method="get">
+    <div>
+        <p>
+            Find booking by guest name: <input type="text" name="SearchString" /> (Optional) Owner Number:
+            <label name="ownerNum"></label>
+            @Html.DropDownList("Number", (SelectList)ViewBag.ownerNum, "All", new { })
             <input type="submit" value="Search" />
         </p>
     </div>

@@ -1,0 +1,142 @@
+﻿@model IEnumerable<LodgeDogDB.Models.Bookings>
+
+<form asp-controller="Bookings" asp-action="Search" method="get">
+    <div>
+        <p>
+            Find by name: <input type="text" name="SearchString" /> |
+            <label name="ownerNum"></label>
+            @Html.DropDownList("Number", (SelectList)ViewBag.ownerNum, "All", new { @class = "form-control" })
+            <input type="submit" value="Search" />
+        </p>
+    </div>
+</form>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Source)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Primaryguestname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numberofoccupants)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unittype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datebookingmade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checkin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checkout)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Baserateofpay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rci)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pointsused)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservationpassesneeded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservationpassespurchased)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guestpassesadded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guestpassespurchased)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wyndhamconfirmationnumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Primaryguestname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numberofoccupants)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Property)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unittype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datebookingmade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Checkin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Checkout)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Baserateofpay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rci)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tri)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pointsused)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservationpassesneeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservationpassespurchased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guestpassesadded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guestpassespurchased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wyndhamconfirmationnumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberNavigation.Number)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
